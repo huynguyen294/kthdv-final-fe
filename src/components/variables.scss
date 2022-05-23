@@ -1,0 +1,18 @@
+$background-color: rgba(0, 0, 0, 0.05);
+$shadow-color: rgba(0, 0, 0, 0.1);
+$line-color: rgba(0, 0, 0, 0.5);
+$el-primary-color: #ee4266;
+$color: #000;
+
+$price-color: rgb(255, 77, 0);
+$link-color: #0247FE;
+
+@keyframes subMenuUp {
+  from{
+    transform: translateY(50px);
+    opacity: 0;
+  }to{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+} 
