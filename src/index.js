@@ -13,12 +13,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import './index.css';
 import './css/font-awesome/all.min.css';
+import configData from './configs/configs.json';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={configData.basename}>
         <App />
       </BrowserRouter>
     </Provider>

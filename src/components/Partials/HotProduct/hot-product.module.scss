@@ -1,0 +1,22 @@
+@import '../../variables.scss';
+
+.hot-product{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    .title{
+        margin-top: 1em;
+        p{
+            margin: 0;
+        }
+    }
+    .filter-container{
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .box-product{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
