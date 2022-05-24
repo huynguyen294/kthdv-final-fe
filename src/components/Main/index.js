@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { Container } from 'react-bootstrap';
 import { Routes, Route } from 'react-router-dom';
 
-import { Home, Search, Cart } from '../index';
+import { Home, Search, Cart, Detail, ScrollToTop } from '../index';
 import styles from './main.module.scss';
 
 function Main() {
@@ -10,10 +10,12 @@ function Main() {
 
   return (
     <Container className={main_style}>
+      <ScrollToTop></ScrollToTop>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/detail/:id" element={<Detail />} />
       </Routes>
     </Container>
   );

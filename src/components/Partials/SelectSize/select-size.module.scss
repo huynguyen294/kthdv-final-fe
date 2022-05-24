@@ -1,0 +1,56 @@
+@import '../../variables.scss';
+
+.select-size{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px 0;
+
+    .card-size{
+        display: flex;
+        align-items: center;
+        width: 120px;
+        background-color: #fff;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        padding: 5px;
+        position: relative;
+        border: 1px solid #fff;
+        cursor: pointer;
+
+        .check{
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border: 23px solid transparent;
+            border-top: 0;
+            border-right: 23px solid $el-primary-color;
+            position: absolute;
+            display: none;
+        }
+
+        i{
+            position: absolute;
+            left: 10px;
+            top: 2px;
+            font-size: 10px;
+            color: #fff;
+            border-radius: 3px;
+        }
+
+        img{
+            width: 50px;
+            margin-right: 5px;
+            border-radius: 3px;
+            max-height: 100%;
+        }
+
+        &.active{
+            border: 1px solid $el-primary-color;
+            .check{
+                display: block;
+            }
+        }
+    }
+}

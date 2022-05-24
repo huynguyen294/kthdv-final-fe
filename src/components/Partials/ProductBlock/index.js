@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { memo } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './product-block.module.scss';
 
@@ -13,7 +14,13 @@ function ProductBlock({ product }) {
 
   return (
     <div className={productBlock_style}>
-      <img src={product.image} alt="" className={productImage_style} />
+      <Link to={'/detail/' + product._id}>
+        <img
+          src={product.image}
+          alt="anh san pham"
+          className={productImage_style}
+        />
+      </Link>
       <div
         className={clsx(productPrice_style, {
           [sale_style]: product.sale !== product.price,
