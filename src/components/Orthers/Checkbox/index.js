@@ -1,28 +1,37 @@
 import clsx from 'clsx';
 import { memo, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import styles from './checkbox.module.scss';
 
-function Checkbox({ lable, checked }) {
+function Checkbox({ lable, checked, unChecked, name, handleGetChecked }) {
   const [active, setActive] = useState(false);
-  const { theme } = useSelector((state) => state.UIStore);
 
   const {
     'checkbox-icon': checkboxIcon_style,
     checkbox: checkbox_style,
     active: active_style,
-    dark: dark_style,
   } = styles;
 
   useEffect(() => {
-    setActive(checked);
+    if (checked) {
+      setActive(checked);
+    }
   }, [checked]);
 
+  useEffect(() => {
+    if (unChecked) {
+      setActive(false);
+    }
+  }, [unChecked]);
+
+  useEffect(() => {
+    if (handleGetChecked) {
+      handleGetChecked({ active, name });
+    }
+  }, [active]);
   return (
     <div
       className={clsx(checkbox_style, {
         [active_style]: active,
-        [dark_style]: theme,
       })}
       onClick={() => setActive(!active)}
     >

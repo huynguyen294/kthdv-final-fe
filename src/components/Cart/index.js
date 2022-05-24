@@ -1,64 +1,66 @@
-import clsx from 'clsx';
-import { memo, useMemo, useState } from 'react';
+import { memo, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { FORMAT_MONEY } from '../../actions';
 
-import { Checkbox, CartItem, data } from '../index';
+import { CartItem, data } from '../index';
 import styles from './cart.module.scss';
 
 function Cart() {
   const { products } = data;
   const cartProducts = useMemo(() => products.slice(10, 13), [products]);
-  const [allChecked, setAllChecked] = useState(false);
+  const [itemCheckeds, setItemCheckeds] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const {
     'oder-final-price': oderFinalPrice_style,
-    'cart-control': cartControl_style,
-    'checkbox-count': checkboxCount_style,
     'main-cart': mainCart_style,
-    'address-control': addressControl_style,
-    'user-address': userAddress_style,
-    'address-title': addressTitle_style,
-    'address-body': addressBody_style,
     'oder-control': oderControl_style,
     'oder-body': oderBody_style,
-    'arrow-up': arrowUp_style,
-    tooltip: tooltip_style,
     message: message_style,
-    counter: counter_style,
     cart: cart_style,
-    dark: dark_style,
     'oder-title': oderTitle_style,
+    'box-cart': boxCart_style,
   } = styles;
+
+  const handleGetItemChecked = (item) => {
+    setItemCheckeds((prev) => {
+      if (!prev.length) {
+        return [...prev, item];
+      } else {
+        // xử lí không thêm phần từe trùng và update phần tử bị trùng
+        if (prev.find((prevItem) => prevItem.name === item.name)) {
+          prev.forEach((prevItem, idx) => {
+            if (prevItem.name === item.name) {
+              prev[idx] = { ...prev[idx], ...item };
+            }
+          });
+        } else {
+          return [...prev, item];
+        }
+        return [...prev];
+      }
+    });
+  };
+
+  useLayoutEffect(() => {
+    const price = itemCheckeds.reduce((acc, item) => {
+      return acc + item.currPrice;
+    }, 0);
+    setTotalPrice(price);
+  }, [itemCheckeds]);
 
   return (
     <Row className={cart_style}>
-      <h1>Giỏ hàng</h1>
-      <Col lg={9}>
-        <div className={cartControl_style}>
-          <div
-            onClick={() => setAllChecked(!allChecked)}
-            className={checkboxCount_style}
-          >
-            <Checkbox lable={'Tất cả'} checked={allChecked} />
-            <p className={counter_style}>(1 sản phẩm)</p>
-          </div>
-          <span>Đơn giá</span>
-          <span>Số lượng</span>
-          <span>Thành tiền</span>
-          <span>
-            <i className="fa-light fa-trash-can"></i>
-            <div className={tooltip_style}>
-              <div className={arrowUp_style}></div>Xóa sản phẩm được chọn
-            </div>
-          </span>
-        </div>
+      <Col lg={9} className={boxCart_style}>
+        <h1>Giỏ hàng</h1>
         <div className={mainCart_style}>
           {cartProducts.map((cartProduct) => (
             <CartItem
               key={cartProduct._id}
               product={cartProduct}
-              allChecked={allChecked}
+              getCart={handleGetItemChecked}
+              productSize={cartProduct.size[0]}
             />
           ))}
         </div>
@@ -69,7 +71,9 @@ function Cart() {
           <hr />
           <div className={oderBody_style}>
             <p>Tổng tiền</p>
-            <p className={oderFinalPrice_style}>0đ</p>
+            <p className={oderFinalPrice_style}>
+              {FORMAT_MONEY('' + totalPrice)}đ
+            </p>
           </div>
           <hr />
           <p className={message_style}>

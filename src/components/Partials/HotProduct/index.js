@@ -13,6 +13,7 @@ function HotProduct() {
     'box-product': boxProduct_style,
   } = styles;
   const products = data.products;
+
   const pageLength = 8;
   const pages = useMemo(() => {
     const pagesSize = Math.round(products.length / pageLength);
@@ -22,6 +23,7 @@ function HotProduct() {
     }
     return pages;
   }, [products]);
+
   const [currProducts, setCurrProducts] = useState(products.slice([]));
   const [currPage, setCurrPage] = useState(1);
 
