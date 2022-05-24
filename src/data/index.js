@@ -121,7 +121,7 @@ export const collections = [
   {
     _id: '6',
     category_id: '2',
-    name: 'Áo khoát đơn giản',
+    name: 'Áo khoác đơn giản',
     productIds: [1, 2, 3, 4, 5, 6],
   },
   {
@@ -133,7 +133,7 @@ export const collections = [
   {
     _id: '8',
     category_id: '2',
-    name: 'Quần shot đơn giản',
+    name: 'Quần short đơn giản',
     productIds: [1, 2, 3, 4, 5, 6],
   },
   {

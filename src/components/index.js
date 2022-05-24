@@ -5,6 +5,7 @@ export { default as Cart } from './Cart';
 export { default as Login } from './Login';
 export { default as Search } from './Search';
 export { default as Detail } from './Detail';
+export { default as Payment } from './Payment';
 
 export * from './Partials';
 export * from './Orthers';
